@@ -21,28 +21,23 @@ class Parser(object):
         '''Парсит ответ на whois запрос регионального интернет регистратора rir
            и возвращает tuple (ip, asn, провайдера) '''
         if rir == 'ripe':
-            ip_pattern = r'\d+\.\d+\.\d+\.\d+/\d+'
             as_pattern = r'AS\d+'
             provider_pattern = r'mnt-by: *(.*)'
         elif rir == 'afrinic':
-            ip_pattern = r'\d+\.\d+\.\d+\.\d+/\d+'
             as_pattern = r'AS\d+'
             provider_pattern = r'mnt-by: *(.+)'
         elif rir == 'arin':
-            ip_pattern = r'\d+\.\d+\.\d+\.\d+/\d+'
             as_pattern = r'AS\d+'
             provider_pattern = r'NetHandle: +(.*)'
         elif rir == 'apnic':
-            ip_pattern = r'\d+\.\d+\.\d+\.\d+/\d+'
             as_pattern = r'AS\d+'
             provider_pattern = r'NetHandle: +(.*)'
-        ip_found = findall(ip_pattern, text)
         as_found = findall(as_pattern, text)
         provider_found = findall(provider_pattern, text)
-        ip = self._choose_from_parsed(ip_found)
         asys = self._choose_from_parsed(as_found)
         provider = self._choose_from_parsed(provider_found)
-        return ip, asys, provider
+        result = {'ip': '', 'asys': asys, 'provider': provider}
+        return result
 
     def _choose_from_parsed(self, found_items):
         '''Метод, который выбирает наидлиннейший из элементов списка,
@@ -50,7 +45,7 @@ class Parser(object):
         if len(found_items) > 1:
             return max(found_items, key=len)
         elif len(found_items) == 0:
-            return None
+            return ' '
         else:
             return found_items[0]
 

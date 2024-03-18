@@ -63,8 +63,11 @@ class Main(object):
                 continue
             whois_reply = w.get_whois(rir, ip)
             parsed_reply = p.parse_reply(rir, whois_reply)
-            parsed_reply[0] = ip
-            print(parsed_reply)
+            parsed_reply['ip'] = ip
+            print(parsed_reply['ip'] + ' ' +
+                  parsed_reply['asys'] + ' ' +
+                  parsed_reply['provider']
+                  )
         print('Программа завершила работу')
         return
 

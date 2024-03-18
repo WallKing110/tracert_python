@@ -63,8 +63,7 @@ class Main(object):
                 continue
             whois_reply = w.get_whois(rir, ip)
             parsed_reply = p.parse_reply(rir, whois_reply)
-            if parsed_reply[0] is None:
-                parsed_reply[0] = ip
+            parsed_reply[0] = ip
             print(parsed_reply)
         print('Программа завершила работу')
         return

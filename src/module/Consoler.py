@@ -38,7 +38,7 @@ class Consoler(object):
         '''Метод берет на вход текст команды traceroute и поднимает
 ошибку, если не удалось дотрассироваться до конечного хоста'''
         if self.system == 'linux':
-            end_of_incmpt_out = '* * */n'
+            end_of_incmplt_out = '* * */n'
             index_of_incmplt_out = text.rfind(end_of_incmplt_out)
             if index_of_incmplt_out == len(end_of_incmplt_out):
                 raise UnreachableHostException(self.ip)
